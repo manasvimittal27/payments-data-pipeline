@@ -1,0 +1,17 @@
+{
+  "captured_payments":143480,
+  "captured_amount":482903562.8100000024,
+  "refunds":5519,
+  "chargebacks":166,
+  "settlement_rows_expected":31801,
+  "bank_missing":119,
+  "bank_duplicates":95,
+  "bank_unexpected":3,
+  "old_mdr_merchants":[
+    "M30118",
+    "M30199",
+    "M30240",
+    "M30367"
+  ],
+  "old_mdr_rows":100
+}

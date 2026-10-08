@@ -1,0 +1,5 @@
+recon_status,merchant_days,abs_difference_inr
+matched,31582,0.02
+missing_in_bank_file,119,1933948.89
+fee_mismatch,100,8721.89
+unexpected_in_bank_file,3,31537.72

@@ -1,0 +1,73 @@
+digraph G {
+rankdir=LR; bgcolor="#fcfcfb"; nodesep=0.18; ranksep=0.9;
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#8a8984", penwidth=0.8];
+edge [color="#b9b8b2", arrowsize=0.6];
+{ rank=same; "source.payments_pipeline.raw.gateway_payments"; "source.payments_pipeline.raw.legacy_pos_payments"; "source.payments_pipeline.raw.refunds"; "source.payments_pipeline.raw.chargebacks"; "source.payments_pipeline.raw.merchants_onboarding"; "source.payments_pipeline.raw.merchants_crm"; "source.payments_pipeline.raw.bank_settlements"; }
+
+{ rank=same; "model.payments_pipeline.stg_merchants_crm"; "model.payments_pipeline.stg_merchants"; "model.payments_pipeline.stg_refunds"; "model.payments_pipeline.stg_payments"; "model.payments_pipeline.stg_chargebacks"; "model.payments_pipeline.stg_bank_settlements"; }
+{ rank=same; "model.payments_pipeline.int_payments_validated"; "model.payments_pipeline.int_refunds_validated"; }
+{ rank=same; "model.payments_pipeline.fct_refunds"; "model.payments_pipeline.fct_chargebacks"; "model.payments_pipeline.mart_merchant_daily"; "model.payments_pipeline.fct_payments"; "model.payments_pipeline.dim_merchants"; "model.payments_pipeline.rpt_settlement_reconciliation"; }
+
+"model.payments_pipeline.dq_quarantine" [label="dq_quarantine", fillcolor="#eb6834", fontcolor="white"];
+"model.payments_pipeline.dq_merchant_master_conflicts" [label="dq_merchant_master_conflicts", fillcolor="#eb6834", fontcolor="white"];
+"model.payments_pipeline.int_payments_validated" [label="int_payments_validated", fillcolor="#9ec5f4", fontcolor="#0b0b0b"];
+"model.payments_pipeline.fct_refunds" [label="fct_refunds", fillcolor="#2a78d6", fontcolor="white"];
+"model.payments_pipeline.fct_chargebacks" [label="fct_chargebacks", fillcolor="#2a78d6", fontcolor="white"];
+"model.payments_pipeline.mart_merchant_daily" [label="mart_merchant_daily", fillcolor="#2a78d6", fontcolor="white"];
+"model.payments_pipeline.fct_payments" [label="fct_payments", fillcolor="#2a78d6", fontcolor="white"];
+"model.payments_pipeline.dim_merchants" [label="dim_merchants", fillcolor="#2a78d6", fontcolor="white"];
+"model.payments_pipeline.rpt_settlement_reconciliation" [label="rpt_settlement_reconciliation", fillcolor="#2a78d6", fontcolor="white"];
+"model.payments_pipeline.stg_merchants_crm" [label="stg_merchants_crm", fillcolor="#cde2fb", fontcolor="#0b0b0b"];
+"model.payments_pipeline.stg_merchants" [label="stg_merchants", fillcolor="#cde2fb", fontcolor="#0b0b0b"];
+"model.payments_pipeline.stg_refunds" [label="stg_refunds", fillcolor="#cde2fb", fontcolor="#0b0b0b"];
+"model.payments_pipeline.stg_payments" [label="stg_payments", fillcolor="#cde2fb", fontcolor="#0b0b0b"];
+"model.payments_pipeline.stg_chargebacks" [label="stg_chargebacks", fillcolor="#cde2fb", fontcolor="#0b0b0b"];
+"model.payments_pipeline.stg_bank_settlements" [label="stg_bank_settlements", fillcolor="#cde2fb", fontcolor="#0b0b0b"];
+"seed.payments_pipeline.chargeback_reason_codes" [label="chargeback_reason_codes", fillcolor="#e4e3df", fontcolor="#0b0b0b"];
+"model.payments_pipeline.int_refunds_validated" [label="int_refunds_validated", fillcolor="#9ec5f4", fontcolor="#0b0b0b"];
+"model.payments_pipeline.dq_issue_log" [label="dq_issue_log", fillcolor="#eb6834", fontcolor="white"];
+"source.payments_pipeline.raw.gateway_payments" [label="raw.gateway_payments", fillcolor="#e4e3df", fontcolor="#0b0b0b"];
+"source.payments_pipeline.raw.legacy_pos_payments" [label="raw.legacy_pos_payments", fillcolor="#e4e3df", fontcolor="#0b0b0b"];
+"source.payments_pipeline.raw.refunds" [label="raw.refunds", fillcolor="#e4e3df", fontcolor="#0b0b0b"];
+"source.payments_pipeline.raw.chargebacks" [label="raw.chargebacks", fillcolor="#e4e3df", fontcolor="#0b0b0b"];
+"source.payments_pipeline.raw.merchants_onboarding" [label="raw.merchants_onboarding", fillcolor="#e4e3df", fontcolor="#0b0b0b"];
+"source.payments_pipeline.raw.merchants_crm" [label="raw.merchants_crm", fillcolor="#e4e3df", fontcolor="#0b0b0b"];
+"source.payments_pipeline.raw.bank_settlements" [label="raw.bank_settlements", fillcolor="#e4e3df", fontcolor="#0b0b0b"];
+"model.payments_pipeline.dim_merchants" -> "model.payments_pipeline.rpt_settlement_reconciliation";
+"model.payments_pipeline.dq_merchant_master_conflicts" -> "model.payments_pipeline.dq_issue_log";
+"model.payments_pipeline.fct_chargebacks" -> "model.payments_pipeline.dq_issue_log";
+"model.payments_pipeline.fct_chargebacks" -> "model.payments_pipeline.mart_merchant_daily";
+"model.payments_pipeline.fct_payments" -> "model.payments_pipeline.fct_chargebacks";
+"model.payments_pipeline.fct_payments" -> "model.payments_pipeline.int_refunds_validated";
+"model.payments_pipeline.fct_payments" -> "model.payments_pipeline.mart_merchant_daily";
+"model.payments_pipeline.fct_refunds" -> "model.payments_pipeline.mart_merchant_daily";
+"model.payments_pipeline.int_payments_validated" -> "model.payments_pipeline.dq_issue_log";
+"model.payments_pipeline.int_payments_validated" -> "model.payments_pipeline.dq_quarantine";
+"model.payments_pipeline.int_payments_validated" -> "model.payments_pipeline.fct_payments";
+"model.payments_pipeline.int_refunds_validated" -> "model.payments_pipeline.dq_issue_log";
+"model.payments_pipeline.int_refunds_validated" -> "model.payments_pipeline.dq_quarantine";
+"model.payments_pipeline.int_refunds_validated" -> "model.payments_pipeline.fct_refunds";
+"model.payments_pipeline.mart_merchant_daily" -> "model.payments_pipeline.rpt_settlement_reconciliation";
+"model.payments_pipeline.rpt_settlement_reconciliation" -> "model.payments_pipeline.dq_issue_log";
+"model.payments_pipeline.stg_bank_settlements" -> "model.payments_pipeline.dq_issue_log";
+"model.payments_pipeline.stg_bank_settlements" -> "model.payments_pipeline.rpt_settlement_reconciliation";
+"model.payments_pipeline.stg_chargebacks" -> "model.payments_pipeline.fct_chargebacks";
+"model.payments_pipeline.stg_merchants" -> "model.payments_pipeline.dim_merchants";
+"model.payments_pipeline.stg_merchants" -> "model.payments_pipeline.dq_merchant_master_conflicts";
+"model.payments_pipeline.stg_merchants" -> "model.payments_pipeline.int_payments_validated";
+"model.payments_pipeline.stg_merchants_crm" -> "model.payments_pipeline.dim_merchants";
+"model.payments_pipeline.stg_merchants_crm" -> "model.payments_pipeline.dq_merchant_master_conflicts";
+"model.payments_pipeline.stg_payments" -> "model.payments_pipeline.int_payments_validated";
+"model.payments_pipeline.stg_refunds" -> "model.payments_pipeline.int_refunds_validated";
+"seed.payments_pipeline.chargeback_reason_codes" -> "model.payments_pipeline.fct_chargebacks";
+"source.payments_pipeline.raw.bank_settlements" -> "model.payments_pipeline.dq_issue_log";
+"source.payments_pipeline.raw.bank_settlements" -> "model.payments_pipeline.stg_bank_settlements";
+"source.payments_pipeline.raw.chargebacks" -> "model.payments_pipeline.stg_chargebacks";
+"source.payments_pipeline.raw.gateway_payments" -> "model.payments_pipeline.dq_issue_log";
+"source.payments_pipeline.raw.gateway_payments" -> "model.payments_pipeline.stg_payments";
+"source.payments_pipeline.raw.legacy_pos_payments" -> "model.payments_pipeline.dq_issue_log";
+"source.payments_pipeline.raw.legacy_pos_payments" -> "model.payments_pipeline.stg_payments";
+"source.payments_pipeline.raw.merchants_crm" -> "model.payments_pipeline.stg_merchants_crm";
+"source.payments_pipeline.raw.merchants_onboarding" -> "model.payments_pipeline.stg_merchants";
+"source.payments_pipeline.raw.refunds" -> "model.payments_pipeline.stg_refunds";
+}

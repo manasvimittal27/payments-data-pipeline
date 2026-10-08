@@ -1,0 +1,14 @@
+{
+  "raw_payment_rows": 167483,
+  "clean_payments": 152670,
+  "captured_value_cr": 48.29,
+  "merchants": 400,
+  "merchant_days_reconciled": 31804,
+  "match_rate": 0.993,
+  "quarantined_records": 720,
+  "missing_settlement_inr": 1933948.89,
+  "fee_underpaid_inr": 8721.890000000001,
+  "legacy_rows_wrong_date_if_utc": 3068,
+  "legacy_value_wrong_date_if_utc_inr": 10050002.940000033,
+  "all_verification_checks_pass": true
+}

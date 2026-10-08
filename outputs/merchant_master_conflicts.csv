@@ -1,0 +1,24 @@
+merchant_id,onboarding_category,crm_category,conflict_type,authoritative_source
+M30042,food_restaurants,healthcare,category_conflict,onboarding system
+M30052,apparel_ecommerce,education,category_conflict,onboarding system
+M30069,apparel_ecommerce,education,category_conflict,onboarding system
+M30071,apparel_ecommerce,education,category_conflict,onboarding system
+M30077,healthcare,digital_goods,category_conflict,onboarding system
+M30095,education,travel,category_conflict,onboarding system
+M30116,food_restaurants,healthcare,category_conflict,onboarding system
+M30135,digital_goods,apparel_ecommerce,category_conflict,onboarding system
+M30152,food_restaurants,digital_goods,category_conflict,onboarding system
+M30156,electronics,food_restaurants,category_conflict,onboarding system
+M30167,digital_goods,education,category_conflict,onboarding system
+M30175,travel,apparel_ecommerce,category_conflict,onboarding system
+M30191,apparel_ecommerce,travel,category_conflict,onboarding system
+M30210,food_restaurants,digital_goods,category_conflict,onboarding system
+M30214,apparel_ecommerce,digital_goods,category_conflict,onboarding system
+M30217,food_restaurants,digital_goods,category_conflict,onboarding system
+M30219,apparel_ecommerce,education,category_conflict,onboarding system
+M30231,food_restaurants,electronics,category_conflict,onboarding system
+M30335,travel,education,category_conflict,onboarding system
+M30344,digital_goods,food_restaurants,category_conflict,onboarding system
+M30357,apparel_ecommerce,travel,category_conflict,onboarding system
+M30005,digital_goods,,missing_from_crm,onboarding system
+M39990,,travel,in_crm_only,onboarding system

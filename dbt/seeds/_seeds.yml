@@ -1,0 +1,8 @@
+version: 2
+seeds:
+  - name: chargeback_reason_codes
+    description: >
+      Reference list of accepted chargeback reason codes by network. Visa and Mastercard codes are
+      real code numbers with short descriptions; the RuPay rows are illustrative placeholders.
+    config:
+      column_types: {reason_code: varchar}

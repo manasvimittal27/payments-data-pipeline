@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Extracts landed as delivered by each source system (all columns text).
+    schema: raw
+    tables:
+      - name: gateway_payments
+        description: Payment gateway extract. Timestamps in UTC (ISO 8601). Contains status-update records and replayed batches.
+      - name: legacy_pos_payments
+        description: Legacy in-store terminal feed. Local IST timestamps as DD/MM/YYYY, amounts in paise.
+      - name: refunds
+        description: Refund system extract (UTC timestamps).
+      - name: chargebacks
+        description: Chargeback feed from the card networks.
+      - name: merchants_onboarding
+        description: Merchant onboarding system. AUTHORITATIVE source for merchant category, pricing (MDR) and status.
+      - name: merchants_crm
+        description: Sales CRM copy of merchant data. Not authoritative; used only to detect conflicts.
+      - name: bank_settlements
+        description: Daily settlement file from the partner bank (T+1).

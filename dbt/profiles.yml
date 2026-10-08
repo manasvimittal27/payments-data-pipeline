@@ -1,0 +1,9 @@
+# Local warehouse: DuckDB file in the project root. In production this profile would point at
+# Snowflake or Databricks instead; the models are written in portable SQL.
+payments_pipeline:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('WAREHOUSE_PATH', '../warehouse.duckdb') }}"
+      threads: 4

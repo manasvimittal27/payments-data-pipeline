@@ -1,0 +1,32 @@
+{
+  "captured_payments": {
+    "expected": 143480,
+    "pipeline": 143480,
+    "ok": true
+  },
+  "captured_amount_inr": {
+    "expected": 482903562.81,
+    "pipeline": 482903562.81,
+    "ok": true
+  },
+  "refunds": {
+    "expected": 5519,
+    "pipeline": 5519,
+    "ok": true
+  },
+  "chargebacks": {
+    "expected": 166,
+    "pipeline": 166,
+    "ok": true
+  },
+  "settlements_missing_in_bank": {
+    "expected": 119,
+    "pipeline": 119,
+    "ok": true
+  },
+  "bank_fee_errors": {
+    "expected": 100,
+    "pipeline": 100,
+    "ok": true
+  }
+}

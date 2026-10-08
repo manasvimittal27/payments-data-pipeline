@@ -1,0 +1,11 @@
+network,reason_code,description,reason_group
+visa,10.4,Other fraud - card-absent environment,fraud
+visa,12.6,Duplicate processing,processing_error
+visa,13.1,Merchandise or services not received,consumer_dispute
+visa,13.3,Not as described or defective,consumer_dispute
+mastercard,4834,Point-of-interaction error,processing_error
+mastercard,4837,No cardholder authorisation,fraud
+mastercard,4853,Cardholder dispute,consumer_dispute
+mastercard,4855,Goods or services not provided,consumer_dispute
+rupay,1061,Fraudulent transaction,fraud
+rupay,1065,Goods or services not received,consumer_dispute

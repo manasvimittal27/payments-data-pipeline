@@ -1,0 +1,22 @@
+source_table,check_name,rows_affected,amount_affected,severity,pipeline_action
+bank_settlements,Duplicate settlement lines,95,,high,Collapsed; confirm with bank that payment was not made twice
+legacy_pos_payments,Legacy IST timestamps that would shift date if read as UTC,3068,10050002.940000033,high,Avoided by correct parsing (IST 18:30 or later = next day in IST-as-UTC+5:30 shift)
+legacy_pos_payments,Local IST timestamps in a different format from the gateway,13268,,high,"Parsed as IST, not shifted; treating them as UTC would move these to the wrong business date"
+payments,Quarantined: missing merchant id,200,685635.1799999999,high,Held in dq_quarantine; excluded from marts
+payments,Quarantined: non positive amount,150,-25496.0,high,Held in dq_quarantine; excluded from marts
+payments,Quarantined: unknown merchant id,250,873289.2399999998,high,Held in dq_quarantine; excluded from marts
+refunds,Quarantined: orphan refund no payment,60,150300.43,high,Held in dq_quarantine; raise with refund system owner
+refunds,Quarantined: possible duplicate refund,2,1094.75,high,Held in dq_quarantine; raise with refund system owner
+refunds,Quarantined: refund exceeds payment,58,168807.97,high,Held in dq_quarantine; raise with refund system owner
+settlement_reconciliation,Settlement fee mismatch,100,8721.890000000005,high,Bank fee differs from contracted MDR: raise pricing dispute
+settlement_reconciliation,Settlement missing in bank file,119,1933948.8899999992,high,Chase bank for unpaid settlement
+settlement_reconciliation,Settlement unexpected in bank file,3,31537.72,high,Investigate: bank paid a merchant we have no record of
+chargebacks,Unrecognised reason code,7,7521.06,medium,Kept and flagged; request corrected code from the network feed
+gateway_payments,Replayed batch: exact duplicate rows,1115,,medium,Collapsed to one row in staging
+merchant_master,CRM category differs from onboarding system,21,,medium,Onboarding system used as authoritative source
+merchant_master,Merchant in CRM but not in onboarding system,1,,medium,Onboarding system used as authoritative source
+merchant_master,Merchant missing from CRM,1,,medium,Onboarding system used as authoritative source
+gateway_payments,Currency blank or wrongly formatted,4615,,low,Trimmed and upper-cased; blanks defaulted to INR (gateway is INR-only)
+gateway_payments,Payment method in inconsistent case,7514,,low,Lower-cased
+gateway_payments,Superseded status-update records (authorized before captured),13098,,low,"Latest, most-final status kept per payment"
+settlement_reconciliation,Settlement matched,31582,0.02,info,No action

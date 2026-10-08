@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: dim_merchants
+    columns:
+      - name: merchant_id
+        data_tests: [unique, not_null]
+
+  - name: fct_payments
+    description: Validated payments only. Every row has a known merchant, a positive amount and a parsed timestamp.
+    columns:
+      - name: payment_id
+        data_tests: [unique, not_null]
+      - name: merchant_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_merchants'), field: merchant_id}
+      - name: amount
+        data_tests: [not_null, positive]
+      - name: created_at_ist
+        data_tests: [not_null]
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments: {values: [captured, failed]}
+      - name: method
+        data_tests:
+          - accepted_values:
+              arguments: {values: [card, upi, netbanking]}
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments: {values: [INR]}
+
+  - name: fct_refunds
+    columns:
+      - name: refund_id
+        data_tests: [unique, not_null]
+      - name: payment_id
+        data_tests:
+          - relationships:
+              arguments: {to: ref('fct_payments'), field: payment_id}
+      - name: amount
+        data_tests: [positive]
+
+  - name: fct_chargebacks
+    columns:
+      - name: chargeback_id
+        data_tests: [unique, not_null]
+      - name: reason_code_valid
+        description: False when the network sent a code not in the reference list. Warns so the feed owner is chased.
+        data_tests:
+          - accepted_values:
+              arguments: {values: [true]}
+              config: {severity: warn}
+
+  - name: mart_merchant_daily
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [merchant_id, business_date]
+
+  - name: rpt_settlement_reconciliation
+    columns:
+      - name: recon_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [matched, missing_in_bank_file, unexpected_in_bank_file, gross_mismatch, fee_mismatch, other_mismatch]

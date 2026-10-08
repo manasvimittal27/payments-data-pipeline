@@ -1,0 +1,22 @@
+name: payments_pipeline
+version: "1.0.0"
+config-version: 2
+profile: payments_pipeline
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  payments_pipeline:
+    staging:      {+materialized: view,  +schema: staging}
+    intermediate: {+materialized: view,  +schema: intermediate}
+    marts:        {+materialized: table, +schema: marts}
+    audit:        {+materialized: table, +schema: audit}
+
+seeds:
+  payments_pipeline:
+    +schema: reference

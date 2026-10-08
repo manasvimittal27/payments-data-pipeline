@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_merchants
+    description: Merchant master from the authoritative onboarding system.
+    columns:
+      - name: merchant_id
+        data_tests: [unique, not_null]
+      - name: category
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [apparel_ecommerce, electronics, food_restaurants, travel, education, healthcare, digital_goods]
+      - name: mdr_pct
+        data_tests: [not_null, positive]
+
+  - name: stg_payments
+    description: One row per payment across both feeds, IST timestamps, deduplicated.
+    columns:
+      - name: payment_id
+        data_tests: [unique, not_null]
+      - name: merchant_id
+        description: Raw merchant id. Warns (does not fail) when ids are missing or unknown; those rows are quarantined downstream.
+        data_tests:
+          - not_null:
+              config: {severity: warn}
+          - relationships:
+              arguments: {to: ref('stg_merchants'), field: merchant_id}
+              config: {severity: warn}
+
+  - name: stg_chargebacks
+    columns:
+      - name: chargeback_id
+        data_tests: [unique, not_null]
+
+  - name: stg_bank_settlements
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [merchant_id, settlement_date]
